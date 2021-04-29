@@ -3,6 +3,7 @@ from utils.argcheck import check_int_positive
 from utils.io import load_numpy, load_yaml, save_dataframe_csv, find_best_hyperparameters
 from utils.modelnames import models
 from utils.progress import WorkSplitter
+import pandas as pd
 
 import argparse
 
@@ -30,9 +31,10 @@ def main(args):
 
     R_train_item_keyphrase = load_numpy(path=args.data_dir, name=args.train_item_keyphrase_set).toarray()
 
-    table_path = load_yaml('config/global.yml', key='path')['tables']
-    parameters = find_best_hyperparameters(table_path+args.dataset_name, 'NDCG')
-    parameters_row = parameters.loc[parameters['model'] == args.model]
+    # table_path = load_yaml('config/global.yml', key='path')['tables']
+    # parameters = find_best_hyperparameters(table_path+args.dataset_name, 'NDCG')
+    # parameters_row = parameters.loc[parameters['model'] == args.model]
+    parameters_row = pd.DataFrame({'iter': [4], 'lambda': [80], 'rank': [200]})
 
     results = critiquing(matrix_Train=R_train,
                          matrix_Test=R_test,

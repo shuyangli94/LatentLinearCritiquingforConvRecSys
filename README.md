@@ -39,5 +39,8 @@ Keyphrases we used are not necessarily the best. If you are interested in how we
 
 ### Reproduce Critiquing
 ```
+python -u reproduce_critiquing.py --data_dir /home/shuyang/data4/BeerAdvocateDC/ --dataset_name beer/ --save_path beer/critiquing_results.csv --num_users_sampled 10 --critiquing_model_name LP1Simplified
+
 python reproduce_critiquing.py --data_dir "data/beer/" --dataset_name beer/ --save_path beer/critiquing_results.csv --num_users_sampled 10 --critiquing_model_name LP1Simplified
 ```
+
