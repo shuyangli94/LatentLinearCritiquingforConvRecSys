@@ -35,6 +35,7 @@ class UAC(object):
         for user in self.test_users:
             # User id starts from 0
             self.row['user_id'] = user
+            print('User: {}'.format(user))
 
             # The iteration will stop if the wanted item is in top n
             for target_rank in self.target_ranks:
@@ -43,8 +44,10 @@ class UAC(object):
                 candidate_items = self.matrix_Test[user].nonzero()[1]
                 train_items = self.matrix_Train[user].nonzero()[1]
                 wanted_items = np.setdiff1d(candidate_items, train_items)
+                prinT('Rank: {}'.format(target_rank))
 
                 for item in wanted_items:
+                    print('User: {}, Rank: {}, Item: {}'.format(user, target_rank, item))
                     # Item id starts from 0
                     self.row['item_id'] = item
                     # Set the wanted item's initial rank as None
