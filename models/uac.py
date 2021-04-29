@@ -46,8 +46,7 @@ class UAC(object):
                 wanted_items = np.setdiff1d(candidate_items, train_items)
                 wanted_items = sample_items(wanted_items,
                                             min(self.num_items_sampled,
-                                                len(wanted_items)),
-                                            replace=False)
+                                                len(wanted_items)))
                 print('Rank: {}'.format(target_rank))
 
                 for item in wanted_items:
