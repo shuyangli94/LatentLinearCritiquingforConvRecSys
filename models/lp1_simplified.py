@@ -11,7 +11,7 @@ class LP1Simplified(object):
                  max_iteration_threshold, keyphrase_popularity, dataset_name,
                  model, parameters_row, **unused):
         self.keyphrase_freq = keyphrase_freq
-        self.item_keyphrase_freq = item_keyphrase_freq.T
+        self.item_keyphrase_freq = item_keyphrase_freq  #.T
         self.row = row
         self.matrix_Train = matrix_Train
         self.num_users, self.num_items = matrix_Train.shape
