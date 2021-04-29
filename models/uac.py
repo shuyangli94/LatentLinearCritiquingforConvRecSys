@@ -44,7 +44,7 @@ class UAC(object):
                 candidate_items = self.matrix_Test[user].nonzero()[1]
                 train_items = self.matrix_Train[user].nonzero()[1]
                 wanted_items = np.setdiff1d(candidate_items, train_items)
-                prinT('Rank: {}'.format(target_rank))
+                print('Rank: {}'.format(target_rank))
 
                 for item in wanted_items:
                     print('User: {}, Rank: {}, Item: {}'.format(user, target_rank, item))
