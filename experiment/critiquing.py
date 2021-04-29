@@ -31,7 +31,8 @@ def critiquing(matrix_Train,
 
     row = {}
 
-    target_ranks = [1, 5, 10]
+    # target_ranks = [1, 5, 10]
+    target_ranks = [1]
 
     # Randomly select test users
     test_users = sample_users(num_users, num_users_sampled)

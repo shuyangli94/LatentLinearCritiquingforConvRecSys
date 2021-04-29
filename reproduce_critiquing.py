@@ -54,7 +54,8 @@ def main(args):
                          parameters_row=parameters_row,
                          critiquing_model_name=args.critiquing_model_name)
 
-    table_path = load_yaml('config/global.yml', key='path')['tables']
+    # table_path = load_yaml('config/global.yml', key='path')['tables']
+    table_path = '/home/shuyang/data4/LatentLinearCritiquingforConvRecSys/'
     save_dataframe_csv(results, table_path, args.save_path)
 
 

@@ -1,6 +1,6 @@
 from prediction.predictor import predict_scores, predict_vector
 from sklearn.linear_model import LinearRegression
-from utils.critique import UACOptimize
+from utils.critique import UACOptimize, sample_items
 from tqdm import tqdm
 
 import numpy as np
@@ -44,10 +44,15 @@ class UAC(object):
                 candidate_items = self.matrix_Test[user].nonzero()[1]
                 train_items = self.matrix_Train[user].nonzero()[1]
                 wanted_items = np.setdiff1d(candidate_items, train_items)
+                wanted_items = sample_items(wanted_items,
+                                            min(self.num_items_sampled,
+                                                len(wanted_items)),
+                                            replace=False)
                 print('Rank: {}'.format(target_rank))
 
                 for item in wanted_items:
-                    print('User: {}, Rank: {}, Item: {}'.format(user, target_rank, item))
+                    print('User: {}, Rank: {}, Item: {}'.format(
+                        user, target_rank, item))
                     # Item id starts from 0
                     self.row['item_id'] = item
                     # Set the wanted item's initial rank as None
@@ -172,4 +177,3 @@ class UAC(object):
         self.prediction_scores = predict_scores(matrix_U=self.RQ,
                                                 matrix_V=self.Y,
                                                 bias=Bias)
-
