@@ -1,6 +1,7 @@
 from prediction.predictor import predict_scores, predict_vector
 from sklearn.linear_model import LinearRegression
 from utils.critique import UACOptimize
+from tqdm import tqdm
 
 import numpy as np
 
@@ -70,7 +71,7 @@ class UAC(object):
                     query = []
                     affected_items = np.array([])
 
-                    for iteration in range(self.max_iteration_threshold):
+                    for iteration in tqdm(range(self.max_iteration_threshold)):
                         self.row['iteration'] = iteration + 1
                         # Always critique the most popular keyphrase
                         critiqued_keyphrase = remaining_keyphrases[np.argmax(
