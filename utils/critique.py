@@ -145,3 +145,23 @@ def LP1SimplifiedOptimize(initial_prediction_u, keyphrase_freq, affected_items, 
 
     return new_prediction, lambdas
 
+def UACOptimize(initial_prediction_u, keyphrase_freq, affected_items, unaffected_items, num_keyphrases, query, test_user, item_latent, reg):
+
+    critiqued_vector = np.zeros(keyphrase_freq[0].shape)
+
+    for q in query:
+        critiqued_vector[q] = -keyphrase_freq[test_user][q]
+
+    num_critiques = len(query)
+
+    uac_lamb = 1 / (len(critiqued_vector) + 1)
+    for k in range(len(critiqued_vector)):
+        critiqued_vector[k] *= uac_lamb
+
+    critique_score = predict_scores(matrix_U=reg.predict(critiqued_vector.reshape(1, -1)),
+                                    matrix_V=item_latent)
+
+    new_prediction = uac_lamb * initial_prediction_u + critique_score.flatten()
+
+    return new_prediction, []
+
